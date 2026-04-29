@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kịch Bản TikTok Live – Cicook</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #C8191A;
+    --red-dark: #9E1011;
+    --gold: #E8A020;
+    --cream: #FFF8F0;
+    --dark: #1A0A0A;
+    --gray: #6B5B5B;
+    --light-red: #FDF0F0;
+    --green: #2D7A4F;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--cream);
+    color: var(--dark);
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  .header {
+    background: linear-gradient(135deg, var(--red-dark) 0%, var(--red) 50%, #E03030 100%);
+    padding: 40px 32px 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 220px; height: 220px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; left: 20%;
+    width: 140px; height: 140px;
+    border-radius: 50%;
+    background: rgba(232,160,32,0.15);
+  }
+  .brand-tag {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--dark);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 14px;
+    border-radius: 20px;
+    margin-bottom: 14px;
+  }
+  .header h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(36px, 7vw, 64px);
+    color: #fff;
+    line-height: 1;
+    letter-spacing: 2px;
+  }
+  .header h1 span { color: var(--gold); }
+  .header p {
+    color: rgba(255,255,255,0.82);
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .stats-row {
+    display: flex;
+    gap: 20px;
+    margin-top: 22px;
+    flex-wrap: wrap;
+  }
+  .stat-pill {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 30px;
+    padding: 6px 18px;
+    font-size: 13px;
+    color: #fff;
+    font-weight: 700;
+  }
+  .stat-pill span { color: var(--gold); }
+
+  /* FILTERS */
+  .filter-bar {
+    background: #fff;
+    border-bottom: 2px solid rgba(200,25,26,0.1);
+    padding: 14px 32px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+  .filter-btn {
+    border: 2px solid transparent;
+    border-radius: 30px;
+    padding: 6px 18px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: #F5EDED;
+    color: var(--gray);
+  }
+  .filter-btn.active, .filter-btn:hover {
+    background: var(--red);
+    color: #fff;
+    border-color: var(--red);
+  }
+  .filter-btn.cat-lau.active { background: #2D7A4F; border-color: #2D7A4F; }
+  .filter-btn.cat-nuong.active { background: #C87010; border-color: #C87010; }
+  .filter-btn.cat-cham.active { background: #7B3F9E; border-color: #7B3F9E; }
+  .filter-btn.cat-brand.active { background: var(--red-dark); border-color: var(--red-dark); }
+
+  /* MAIN */
+  .main { padding: 28px 32px 60px; max-width: 900px; margin: 0 auto; }
+
+  /* SECTION LABEL */
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 32px 0 16px;
+  }
+  .section-label .icon {
+    width: 40px; height: 40px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+  .section-label h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 1.5px;
+  }
+  .section-label .count {
+    margin-left: auto;
+    background: var(--light-red);
+    color: var(--red);
+    font-size: 12px;
+    font-weight: 800;
+    padding: 3px 12px;
+    border-radius: 20px;
+  }
+
+  /* CARD */
+  .qa-card {
+    background: #fff;
+    border-radius: 16px;
+    margin-bottom: 14px;
+    border: 1.5px solid #F0E0E0;
+    overflow: hidden;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .qa-card:hover {
+    box-shadow: 0 6px 24px rgba(200,25,26,0.12);
+    transform: translateY(-2px);
+  }
+  .qa-card.hidden { display: none; }
+
+  .card-q {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 18px 20px 14px;
+    cursor: pointer;
+    user-select: none;
+  }
+  .q-num {
+    width: 34px; height: 34px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 17px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .q-text {
+    flex: 1;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--dark);
+  }
+  .q-tag {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 2px 10px;
+    border-radius: 20px;
+    margin-top: 4px;
+    flex-shrink: 0;
+  }
+  .toggle-icon {
+    font-size: 18px;
+    color: var(--gray);
+    margin-top: 4px;
+    transition: transform 0.3s;
+    flex-shrink: 0;
+  }
+  .qa-card.open .toggle-icon { transform: rotate(180deg); }
+
+  .card-a {
+    display: none;
+    border-top: 1.5px dashed #F0DADA;
+    padding: 16px 20px 18px 68px;
+    background: var(--cream);
+  }
+  .qa-card.open .card-a { display: block; }
+
+  .host-label {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .host-label::before {
+    content: '🎙️';
+    font-size: 14px;
+  }
+  .a-text {
+    font-size: 14px;
+    line-height: 1.75;
+    color: #3A2020;
+    font-weight: 600;
+  }
+  .a-text strong { color: var(--red); }
+  .tip-box {
+    margin-top: 12px;
+    background: linear-gradient(135deg, #FFF3CD, #FFF8E7);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 8px 8px 0;
+    padding: 10px 14px;
+    font-size: 13px;
+    color: #7A5500;
+    font-weight: 600;
+  }
+  .tip-box::before { content: '💡 TIP HOST: '; font-weight: 800; }
+
+  /* CATEGORY COLORS */
+  .cat-brand .q-num { background: #FEE8E8; color: var(--red-dark); }
+  .cat-brand .q-tag { background: #FEE8E8; color: var(--red-dark); }
+  .cat-lau .q-num { background: #E8F5ED; color: #1A6B3A; }
+  .cat-lau .q-tag { background: #E8F5ED; color: #1A6B3A; }
+  .cat-nuong .q-num { background: #FEF0E0; color: #8B5010; }
+  .cat-nuong .q-tag { background: #FEF0E0; color: #8B5010; }
+  .cat-cham .q-num { background: #F0E8FF; color: #6B2FA0; }
+  .cat-cham .q-tag { background: #F0E8FF; color: #6B2FA0; }
+  .cat-brand .section-label h2 { color: var(--red-dark); }
+  .cat-lau .section-label h2 { color: #1A6B3A; }
+  .cat-nuong .section-label h2 { color: #8B5010; }
+  .cat-cham .section-label h2 { color: #6B2FA0; }
+
+  /* FOOTER */
+  .footer {
+    background: var(--dark);
+    color: rgba(255,255,255,0.6);
+    text-align: center;
+    padding: 20px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .footer strong { color: var(--gold); }
+
+  /* Print */
+  @media print {
+    .filter-bar { display: none; }
+    .card-a { display: block !important; }
+    .qa-card { break-inside: avoid; }
+  }
+
+  @media (max-width: 600px) {
+    .main { padding: 16px 14px 50px; }
+    .filter-bar { padding: 12px 14px; }
+    .header { padding: 28px 16px 24px; }
+    .card-a { padding-left: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="brand-tag">🎬 TikTok Livestream Script</div>
+  <h1>KỊCH BẢN LIVE<br><span>CICOOK</span></h1>
+  <p>30 câu hỏi & trả lời tương tác — dùng cho host khi livestream tự tương tác</p>
+  <div class="stats-row">
+    <div class="stat-pill">🔴 <span>30</span> Câu hỏi</div>
+    <div class="stat-pill">🧅 <span>4</span> Nhóm chủ đề</div>
+    <div class="stat-pill">🎯 Thương hiệu · Lẩu · Nướng · Chấm & Ướp</div>
+  </div>
+</div>
+
+<div class="filter-bar">
+  <button class="filter-btn active" onclick="filterCat('all', this)">Tất cả (30)</button>
+  <button class="filter-btn cat-brand" onclick="filterCat('brand', this)">🏷️ Thương hiệu (8)</button>
+  <button class="filter-btn cat-lau" onclick="filterCat('lau', this)">🍲 Xốt Lẩu (7)</button>
+  <button class="filter-btn cat-nuong" onclick="filterCat('nuong', this)">🔥 Xốt Nướng (9)</button>
+  <button class="filter-btn cat-cham" onclick="filterCat('cham', this)">🌶️ Chấm & Ướp (6)</button>
+</div>
+
+<div class="main">
+
+  <!-- ===== SECTION 1: THƯƠNG HIỆU ===== -->
+  <div class="section-label cat-brand">
+    <div class="icon" style="background:#FEE8E8">🏷️</div>
+    <h2>THƯƠNG HIỆU & TỔNG QUAN</h2>
+    <div class="count">8 câu</div>
+  </div>
+
+  <!-- Q1 -->
+  <div class="qa-card cat-brand" data-cat="brand">
+    <div class="card-q" onclick="toggle(this)">
+      <div class="q-num">01</div>
+      <div class="q-text">Cicook là thương hiệu gì vậy bạn ơi? Mình chưa nghe tên bao giờ hết!</div>
+      <div class="q-tag">Thương hiệu</div>
+      <div class="toggle-icon">▼</div>
+    </div>
+    <div class="card-a">
+      <div class="host-label">Host trả lời</div>
+      <div class="a-text">Dạ cảm ơn bạn đã hỏi nha! <strong>Cicook là thương hiệu tiên phong về gia vị tươi tại Việt Nam</strong> đó ạ. Mình được thành lập với một triết lý rất đặc biệt: thay vì dùng hương liệu hay bột khô, Cicook chỉ dùng nguyên liệu tươi thật sự — cà chua tươi, ớt tươi, thơm tươi… được sơ chế đơn giản để giữ nguyên màu sắc, hương thơm và dưỡng chất. Nói nôm na là <strong>gia vị tươi — không bột, không hương liệu nhân tạo</strong>!</div>
+      <div class="tip-box">Giơ sản phẩm lên camera khi giới thiệu. Nói chậm và rõ tên thương hiệu.</div>
+    </div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="qa-card cat-brand" data-cat="brand">
+    <div class="card-q" onclick="toggle(this)">
+      <div class="q-num">02</div>
+      <div class="q-text">Gia vị tươi khác gì so với gia vị thường mình hay mua ngoài chợ vậy?</div>
+      <div class="q-tag">Thương hiệu</div>
+      <div class="toggle-icon">▼</div>
+    </div>
+    <div class="card-a">
+      <div class="host-label">Host trả lời</div>
+      <div class="a-text">Câu hỏi hay lắm! Gia vị thường ngoài chợ thường là dạng bột khô hoặc pha hương liệu. Còn gia vị tươi Cicook thì <strong>hơn 90% là nguyên liệu tươi</strong> — được xay, phối trộn và tiệt trùng bằng nhiệt hiện đại. Không cần chất tạo màu, không hương liệu nhân tạo. Khi mở ra, bạn sẽ cảm nhận ngay mùi thơm của nguyên liệu thật, màu sắc sống động — y như tự làm tại nhà nhưng không mất công chuẩn bị!</div>
+      <div class="tip-box">Mở nắp sản phẩm và đưa gần camera để viewer "thấy" màu sắc đẹp.</div>
+    </div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="qa-card cat-brand" data-cat="brand">
+    <div class="card-q" onclick="toggle(this)">
+      <div class="q-num">03</div>
+      <div class="q-text">Sản phẩm có chứng nhận an toàn thực phẩm không? Mình sợ mua hàng online không đảm bảo!</div>
+      <div class="q-tag">Thương hiệu</div>
+      <div class="toggle-icon">▼</div>
+    </div>
+    <div class="card-a">
+      <div class="host-label">Host trả lời</div>
+      <div class="a-text">Bạn yên tâm nha! Cicook có đầy đủ <strong>3 chứng nhận quốc tế</strong>: <strong>ISO 22000:2018</strong> (hệ thống quản lý an toàn thực phẩm), <strong>FDA của Mỹ</strong> (đủ tiêu chuẩn xuất khẩu sang thị trường Mỹ), và <strong>HACCP</strong> (tiêu chuẩn kiểm soát mối nguy an toàn thực phẩm). Nhà máy rộng 1.500m² với quy trình tiệt trùng nhiệt hiện đại. Đây là tiêu chuẩn của doanh nghiệp xuất khẩu quốc tế — không phải hàng nhỏ lẻ đâu ạ!</div>
+      <div class="tip-box">Chuẩn bị ảnh chứng nhận để show lên màn hình hoặc giơ catalog.</div>
+    </div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="qa-card cat-brand" data-cat="brand">
+    <div class="card-q" onclick="toggle(this)">
+      <div class="q-num">04</div>
+      <div class="q-text">Cicook phù hợp cho ai vậy ạ? Mình nấu ăn không giỏi lắm.</div>
+      <div class="q-tag">Thương hiệu</div>
+      <div class="toggle-icon">▼</div>
+    </div>
+    <div class="card-a">
+      <div class="host-label">Host trả lời</div>
+      <div class="a-text">Đúng rồi, Cicook <strong>sinh ra dành cho bạn</strong> đó! Dù bạn là người nội trợ bận rộn, bạn trẻ sống một mình, hay người Việt đang ở nước ngoài nhớ vị quê nhà — Cicook giúp bạn nấu được những món ngon đậm đà chỉ trong vài bước đơn giản. Không cần biết nấu ăn giỏi, không cần mua cả chục nguyên liệu. <strong>Mở ra, nấu thôi!</strong></div>
+    </div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="qa-card cat-brand" data-cat="brand">
+    <div class="card-q" onclick="toggle(this)">
+      <div class="q-num">05</div>
+      <div class="q-text">Nguyên liệu trong Cicook lấy từ đâu vậy ạ?</div>
+      <div class="q-tag">Thương hiệu</div>
+      <div class="toggle-icon">▼</div>
+    </div>
+    <div class="card-a">
+      <div class="host-label">Host trả lời</div>
+      <div class="a-text">Cicook tự hào dùng <strong>nông sản và gia vị Việt Nam từ khắp mọi vùng miền</strong>: mắc khén, hạt dổi từ Tây Bắc; quế, hồi, ngò gai từ miền Bắc; nghệ, ớt từ miền Trung; me, lá lốt, húng quế từ miền Tây… Chúng tôi đồng hành cùng người nông dân Việt để nâng cao giá trị nông sản bản địa. Mỗi lon Cicook là cả một bản đồ hương vị Việt Nam!</div>
+      <div class="tip-box">Kể câu chuyện về một nguyên liệu cụ thể (vd: mắc khén Tây Bắc) để tạo cảm xúc.</div>
+    </div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="qa-card cat-brand" data-cat="brand">
+    <div class="card-q" onclick="toggle(this)">
+      <div class="q-num">06</div>
+      <div class="q-text">Mua ở đâu vậy bạn? Shopee có không?</div>
+      <div class="q-tag">Thương hiệu</div>
+      <div class="toggle-icon">▼</div>
+    </div>
+    <div class="card-a">
+      <div class="host-label">Host trả lời</div>
+      <div class="a-text">Có ạ! Cicook bán trên <strong>Shopee</strong> (có link ngay dưới livestream này nha), website <strong>Cicook.vn</strong>, và đang có mặt tại các cửa hàng thực phẩm sạch, siêu thị cao cấp tại TP.HCM, Hà Nội, Đà Nẵng. Mua ngay hôm nay trên Shopee để được freeship và ưu đãi đặc biệt trong livestream này nha!</div>
+      <div class="tip-box">Nhắc link giỏ hàng dưới livestream, gim sản phẩm trong phiên.</div>
+    </div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="qa-card cat-brand" data-cat="brand">
+    <div class="card-q" onclick="toggle(this)">
+      <div class="q-num">07</div>
+      <div class="q-text">Hạn sử dụng của sản phẩm bao lâu vậy ạ?</div>
+      <div class="q-tag">Thương hiệu</div>
+      <div class="toggle-icon">▼</div>
+    </div>
+    <div class="card-a">
+      <div class="host-label">Host trả lời</div>
+      <div class="a-text">Dù là gia vị tươi nhưng nhờ công nghệ <strong>tiệt trùng bằng nhiệt</strong> hiện đại, sản phẩm Cicook bảo quản được lâu mà không cần chất bảo quản hóa học mạnh. Hạn sử dụng in rõ trên bao bì — thường từ <strong>12–18 tháng</strong> kể từ ngày sản xuất. Sau khi mở, bạn bảo quản trong tủ lạnh và dùng trong vòng 1 tuần để đảm bảo hương vị tốt nhất nha!</div>
+    </div>
+  </div>
+
+  <!-- Q8 -->
+  <div class="qa-card cat-brand" data-cat="brand">
+    <div class="card-q" onclick="toggle(this)">
+      <div class="q-num">08</div>
+      <div class="q-text">Cicook có phù hợp cho người ăn chay không?</div>
+      <div class="q-tag">Thương hiệu</div>
+      <div class="toggle-icon">▼</div>
+    </div>
+    <div class="card-a">
+      <div class="host-label">Host trả lời</div>
+      <div class="a-text">Có ạ! Nhiều sản phẩm của Cicook <strong>phù hợp cả mặn lẫn chay</strong>, đặc biệt là <strong>Xốt Lẩu Chua Cay</strong> và <strong>Xốt Nướng Smoky</strong> — bạn có thể nấu lẩu rau củ chay hoặc nướng đậu hũ, nấm đều cực ngon. Trên bao bì có icon "Mặn & Chay" để nhận biết nha!</div>
+    </div>
+  </div>
+
+  <!-- ===== SECTION 2: XỐT LẨU ===== -->
+  <div class="section-label cat-lau">
+    <div class="icon" style="background:#E8F5ED">🍲</div>
+    <h2>XỐT LẨU CHUA CAY</h2>
+    <div class="count" style="background:#E8F5ED;color:#1A6B3A;">7 câu</div>
+  </div>
+
+  <!-- Q9 -->
+  <div class="qa-card cat-lau" data-cat="lau">
+    <div class="card-q" onclick="toggle(this)">
+      <div class="q-num">09</div>
+      <div class="q-text">Xốt lẩu chua cay nấu có khó không? Mình hay nấu lẩu sai vị lắm!</div>
+      <div class="q-tag">Xốt Lẩu</div>
+      <div class="toggle-icon">▼</div>
+    </div>
+    <div class="card-a">
+      <div class="host-label">Host trả lời</div>
+      <div class="a-text">Cực dễ luôn! Công thức chuẩn của Cicook là <strong>1 lon xốt lẩu + 4 lon nước = nước lẩu đủ cho 4 người</strong>. Bạn chỉ cần đổ vào nồi, đun sôi là xong — không cần hầm xương, không cần nêm nếm thêm gì. Vị chua thanh từ cà chua và me, cay nhẹ vừa miệng, thơm mùi sả và gừng tươi. Chuẩn vị 3 miền, ai ăn cũng mê!</div>
+      <div class="tip-box">Demo trực tiếp nếu có thể: đổ lon vào nồi, cho thấy màu đẹp của xốt.</div>
+    </div>
+  </div>
+
+  <!-- Q10 -->
+  <div class="qa-card cat-lau" data-cat="lau">
+    <div class="card-q" onclick="toggle(this)">
+      <div class="q-num">10</div>
+      <div class="q-text">Xốt lẩu Cicook nấu được những món gì ngoài lẩu không?</div>
+      <div class="q-tag">Xốt Lẩu</div>
+      <div class="toggle-icon">▼</div>
+    </div>
+    <div class="card-a">
+      <div class="host-label">Host trả lời</div>
+      <div class="a-text">Ôi trời nhiều lắm! Đây là điểm mạnh nhất của Cicook — <strong>sáng tạo vô vàn món ngon từ một sản phẩm</strong>. Ngoài lẩu, bạn có thể dùng xốt lẩu chua cay để: nấu <strong>bún riêu chua</strong>, làm <strong>sốt chấm hải sản</strong>, nấu <strong>canh chua cá</strong>, làm <strong>sốt ướp tôm nướng</strong>, thậm chí là pha nước chấm gỏi! Một sản phẩm đa năng cực kỳ tiện lợi!</div>
+      <div class="tip-box">Liệt kê nhanh các món, giơ ngón tay đếm để tạo hiệu ứng hấp dẫn trên camera.</div>
+    </div>
+  </div>
+
+  <!-- Q11 -->
+  <div class="qa-card cat-lau" data-cat="lau">
+    <div class="card-q" onclick="toggle(this)">
+      <div class="q-num">11</div>
+      <div class="q-text">Thành phần trong xốt lẩu chua cay có gì vậy ạ? Mình bị dị ứng nên cần biết.</div>
+      <div class="q-tag">Xốt Lẩu</div>
+      <div class="toggle-icon">▼</div>
+    </div>
+    <div class="card-a">
+      <div class="host-label">Host trả lời</div>
+      <div class="a-text">Thành phần gồm: <strong>cà chua, thơm (dứa), me, ớt, giềng, sả, bột cây Hương Thảo</strong>, các loại thảo mộc, đường, muối, chất điều vị (621), chất bảo quản (202, 234), chất chống oxy hóa (316). Sản phẩm <strong>không chứa gluten, không dùng chất tạo màu</strong>. Nếu bạn dị ứng cụ thể thành phần nào, nhắn mình sau để tư vấn kỹ hơn nha!</div>
+    </div>
+  </div>
+
+  <!-- Q12 -->
+  <div class="qa-card cat-lau" data-cat="lau">
+    <div class="card-q" onclick="toggle(this)">
+      <div class="q-num">12</div>
+      <div class="q-text">Một lon dùng được bao nhiêu người ăn vậy?</div>
+      <div class="q-tag">Xốt Lẩu</div>
+      <div class="toggle-icon">▼</div>
+    </div>
+    <div class="card-a">
+      <div class="host-label">Host trả lời</div>
+      <div class="a-text"><strong>1 lon xốt lẩu + 4 lon nước = đủ cho 4 người</strong> ăn lẩu thỏa thích ạ! Nếu bạn thích nước lẩu đậm đà hơn thì chỉ cần thêm ít nước thôi. Lon 480g — giá cực hợp lý so với việc bạn phải ra nhà hàng lẩu hay tự chuẩn bị nguyên liệu từ đầu.</div>
+    </div>
+  </div>
+
+  <!-- Q13 -->
+  <div class="qa-card cat-lau" data-cat="lau">
+    <div class="card-q" onclick="toggle(this)">
+      <div class="q-num">13</div>
+      <div class="q-text">Vị cay của xốt lẩu chua cay có cay nhiều không? Con mình 6 tuổi ăn được không?</div>
+      <div class="q-tag">Xốt Lẩu</div>
+      <div class="toggle-icon">▼</div>
+    </div>
+    <div class="card-a">
+      <div class="host-label">Host trả lời</div>
+      <div class="a-text">Xốt lẩu chua cay của Cicook có <strong>vị cay nhẹ</strong> — phù hợp từ 6 tuổi trở lên theo khuyến nghị của nhà sản xuất. Nếu con bạn nhạy cảm với cay, bạn có thể pha loãng hơn bằng cách thêm nước hoặc cho thêm cà chua tươi để tăng vị chua, giảm cảm giác cay. Cả gia đình đều thưởng thức được!</div>
+    </div>
+  </div>
+
+  <!-- Q14 -->
+  <div class="qa-card cat-lau" data-cat="lau">
+    <div class="card-q" onclick="toggle(this)">
+      <div class="q-num">14</div>
+      <div class="q-text">Nấu lẩu với xốt Cicook thì nên thả nguyên liệu gì ngon nhất?</div>
+      <div class="q-tag">Xốt Lẩu</div>
+      <div class="toggle-icon">▼</div>
+    </div>
+    <div class="card-a">
+      <div class="host-label">Host trả lời</div>
+      <div class="a-text">Xốt lẩu chua cay <strong>phù hợp với mọi nguyên liệu</strong> — đó là điểm đặc biệt! Nhưng để ngon nhất thì mình gợi ý: <strong>hải sản</strong> (tôm, mực, nghêu), <strong>cá</strong> (cá thác lác, cá basa), <strong>bò nhúng</strong>, hoặc combo rau củ chay. Vị chua từ me và cà chua tươi làm cho hải sản cực tươi ngon, khử mùi tanh hiệu quả!</div>
+      <div class="tip-box">Kể một buổi ăn lẩu vui với gia đình/bạn bè để tạo cảm xúc kết nối.</div>
+    </div>
+  </div>
+
+  <!-- Q15 -->
+  <div class="qa-card cat-lau" data-cat="lau">
+    <div class="card-q" onclick="toggle(this)">
+      <div class="q-num">15</div>
+      <div class="q-text">Xốt lẩu chua cay có cần thêm gia vị gì không hay dùng thẳng được luôn?</div>
+      <div class="q-tag">Xốt Lẩu</div>
+      <div class="toggle-icon">▼</div>
+    </div>
+    <div class="card-a">
+      <div class="host-label">Host trả lời</div>
+      <div class="a-text">Đây là điểm mạnh nhất — <strong>dùng thẳng luôn không cần nêm thêm gì!</strong> Cicook gọi là "gia vị tươi phối trộn hoàn chỉnh" vì đã được cân chỉnh chuẩn vị sẵn rồi. Chỉ cần đổ xốt + nước + đun sôi là nước lẩu hoàn hảo. Tất nhiên nếu bạn thích đậm hơn hay nhạt hơn thì điều chỉnh lượng nước là được!</div>
+    </div>
+  </div>
+
+  <!-- ===== SECTION 3: XỐT NƯỚNG ===== -->
+  <div class="section-label cat-nuong">
+    <div class="icon" style="background:#FEF0E0">🔥</div>
+    <h2>XỐT NƯỚNG CÁC LOẠI</h2>
+    <div class="count" style="background:#FEF0E0;color:#8B5010;">9 câu</div>
+  </div>
+
+  <!-- Q16 -->
+  <div class="qa-card cat-nuong" data-cat="nuong">
+    <div class="card-q" onclick="toggle(this)">
+      <div class="q-num">16</div>
+      <div class="q-text">Cicook có mấy loại xốt nướng vậy? Khác nhau chỗ nào?</div>
+      <div class="q-tag">Xốt Nướng</div>
+      <div class="toggle-icon">▼</div>
+    </div>
+    <div class="card-a">
+      <div class="host-label">Host trả lời</div>
+      <div class="a-text">Cicook có <strong>4 loại xốt nướng dạng lon</strong> và thêm <strong>3 loại gói tiện lợi</strong>! Mỗi loại có cá tính riêng: <strong>Mắc Khén</strong> — vị cay the, thơm đặc trưng Tây Bắc; <strong>Smoky</strong> — mùi hun khói, màu cam đỏ trendy; <strong>Xốt Nướng Ớt</strong> — đậm đà, màu đỏ đẹp từ ớt tươi; <strong>Tiêu Đen</strong> — vị bùi béo nhẹ, thanh đạm. Bạn ăn theo khẩu vị nào mình tư vấn ngay!</div>
+      <div class="tip-box">Bày 4 lon xốt nướng ra, chỉ lần lượt từng loại.</div>
+    </div>
+  </div>
+
+  <!-- Q17 -->
+  <div class="qa-card cat-nuong" data-cat="nuong">
+    <div class="card-q" onclick="toggle(this)">
+      <div class="q-num">17</div>
+      <div class="q-text">Mắc khén là gì vậy? Mình ở Sài Gòn chưa nghe bao giờ!</div>
+      <div class="q-tag">Xốt Nướng</div>
+      <div class="toggle-icon">▼</div>
+    </div>
+    <div class="card-a">
+      <div class="host-label">Host trả lời</div>
+      <div class="a-text"><strong>Mắc khén</strong> là một loại hạt tiêu đặc sản của vùng Tây Bắc Việt Nam — thường được gọi là "tiêu rừng" hay "tiêu núi". Hương thơm cực kỳ đặc trưng, vị cay the tê nhẹ đầu lưỡi, khác hẳn tiêu thông thường. Nó là linh hồn của nhiều món thịt nướng Tây Bắc. Cicook đã mang hương vị đặc biệt này vào xốt nướng để bạn ở Sài Gòn hay bất cứ đâu cũng thưởng thức được!</div>
+      <div class="tip-box">Đây là câu hook tốt — có thể cắt đoạn giải thích mắc khén thành video ngắn riêng!</div>
+    </div>
+  </div>
+
+  <!-- Q18 -->
+  <div class="qa-card cat-nuong" data-cat="nuong">
+    <div class="card-q" onclick="toggle(this)">
+      <div class="q-num">18</div>
+      <div class="q-text">1 lon xốt nướng dùng ướp được bao nhiêu thịt vậy ạ?</div>
+      <div class="q-tag">Xốt Nướng</div>
+      <div class="toggle-icon">▼</div>
+    </div>
+    <div class="card-a">
+      <div class="host-label">Host trả lời</div>
+      <div class="a-text">Cực tiết kiệm! <strong>1 lon xốt nướng (230g) = ướp và quét cho 1kg nguyên liệu</strong>. Tức là đủ cho khoảng 4–6 người ăn nướng no nê. Còn nếu dùng <strong>gói nhỏ (90g)</strong> thì đủ cho 400g nguyên liệu — lý tưởng cho bữa ăn 1–2 người. Giá thành mỗi bữa nướng với Cicook rẻ hơn nhiều so với ra quán, mà vị không thua kém!</div>
+    </div>
+  </div>
+
+  <!-- Q19 -->
+  <div class="qa-card cat-nuong" data-cat="nuong">
+    <div class="card-q" onclick="toggle(this)">
+      <div class="q-num">19</div>
+      <div class="q-text">Xốt nướng Smoky vị như thế nào? Mình thấy màu lạ quá!</div>
+      <div class="q-tag">Xốt Nướng</div>
+      <div class="toggle-icon">▼</div>
+    </div>
+    <div class="card-a">
+      <div class="host-label">Host trả lời</div>
+      <div class="a-text"><strong>Xốt Nướng Smoky</strong> là sản phẩm mang hơi hướng trendy nhất của Cicook! Màu cam đỏ đẹp mắt đến từ cà chua, gấc và hành tím. Vị <strong>chua thanh nhẹ nhàng</strong>, thoáng mùi hun khói đặc trưng Tây Bắc — rất phù hợp cho thế hệ trẻ yêu đồ nướng kiểu mới. Dùng để ướp sườn nướng, cánh gà, hay thậm chí pizza home-made cũng tuyệt vời!</div>
+      <div class="tip-box">Xốt nướng Smoky + cánh gà là combo viral tốt cho video ngắn!</div>
+    </div>
+  </div>
+
+  <!-- Q20 -->
+  <div class="qa-card cat-nuong" data-cat="nuong">
+    <div class="card-q" onclick="toggle(this)">
+      <div class="q-num">20</div>
+      <div class="q-text">Nướng bằng nồi chiên không dầu có dùng xốt Cicook được không?</div>
+      <div class="q-tag">Xốt Nướng</div>
+      <div class="toggle-icon">▼</div>
+    </div>
+    <div class="card-a">
+      <div class="host-label">Host trả lời</div>
+      <div class="a-text">Được hoàn toàn! Cicook hoạt động tốt với <strong>nồi chiên không dầu, bếp than, bếp điện, và áp chảo</strong>. Công thức chuẩn: ướp thịt với xốt khoảng <strong>30 phút đến 2 tiếng</strong>, sau đó nướng ở nhiệt độ 200°C trong khoảng 11 phút (với gia vị ướp dạng gói). Những phút cuối quét thêm lớp xốt nướng lên mặt thịt để có màu đẹp và thơm ngào ngạt!</div>
+      <div class="tip-box">Đây là nội dung rất hay cho Reels/TikTok: demo nướng bằng nồi chiên không dầu.</div>
+    </div>
+  </div>
+
+  <!-- Q21 -->
+  <div class="qa-card cat-nuong" data-cat="nuong">
+    <div class="card-q" onclick="toggle(this)">
+      <div class="q-num">21</div>
+      <div class="q-text">Xốt nướng tiêu đen phù hợp với thịt gì nhất vậy?</div>
+      <div class="q-tag">Xốt Nướng</div>
+      <div class="toggle-icon">▼</div>
+    </div>
+    <div class="card-a">
+      <div class="host-label">Host trả lời</div>
+      <div class="a-text"><strong>Xốt Nướng Tiêu Đen</strong> là lựa chọn số 1 cho <strong>thịt bò</strong> — vị bùi béo nhẹ, không bị gắt, tôn vị ngọt tự nhiên của bò lên rất hay. Ngoài ra dùng cho <strong>sườn heo, ức gà, và cả hải sản như mực, tôm</strong> cũng cực ngon. Màu đen đẹp từ nước tương đen và tiêu đen tạo màu sắc rất hấp dẫn khi lên hình!</div>
+    </div>
+  </div>
+
+  <!-- Q22 -->
+  <div class="qa-card cat-nuong" data-cat="nuong">
+    <div class="card-q" onclick="toggle(this)">
+      <div class="q-num">22</div>
+      <div class="q-text">Mình hay đi picnic, mang theo xốt nướng Cicook có tiện không?</div>
+      <div class="q-tag">Xốt Nướng</div>
+      <div class="toggle-icon">▼</div>
+    </div>
+    <div class="card-a">
+      <div class="host-label">Host trả lời</div>
+      <div class="a-text">Tiện cực kỳ! Đặc biệt là các <strong>gói xốt nướng nhỏ (90g)</strong> — nhẹ, gọn, dễ bỏ túi xách đi picnic, cắm trại, tiệc nướng ngoài trời. Bạn ướp thịt ở nhà rồi mang đi, hoặc mang gói xốt theo để quét trực tiếp khi nướng. Không cần mang theo cả chục chai gia vị lỉnh kỉnh nữa!</div>
+      <div class="tip-box">Câu chuyện picnic/ngoài trời rất dễ viral — suggest tạo video cảnh ngoài trời!</div>
+    </div>
+  </div>
+
+  <!-- Q23 -->
+  <div class="qa-card cat-nuong" data-cat="nuong">
+    <div class="card-q" onclick="toggle(this)">
+      <div class="q-num">23</div>
+      <div class="q-text">Xốt nướng mắc khén và xốt nướng ớt cái nào cay hơn?</div>
+      <div class="q-tag">Xốt Nướng</div>
+      <div class="toggle-icon">▼</div>
+    </div>
+    <div class="card-a">
+      <div class="host-label">Host trả lời</div>
+      <div class="a-text">Cả hai đều cay nhưng kiểu cay khác nhau! <strong>Mắc Khén</strong> cay kiểu "the tê" — cay ngay đầu lưỡi nhưng dịu nhanh, hương thơm nổi bật hơn vị cay. <strong>Xốt Nướng Ớt</strong> cay "mọng nước" — cay thanh, đậm đà hơn, đến từ ớt tươi nguyên chất. Nếu bạn mới thử lần đầu, Xốt Nướng Ớt dễ chịu hơn. Còn nếu bạn thích hương vị lạ độc đáo thì Mắc Khén chính là chân ái!</div>
+    </div>
+  </div>
+
+  <!-- Q24 -->
+  <div class="qa-card cat-nuong" data-cat="nuong">
+    <div class="card-q" onclick="toggle(this)">
+      <div class="q-num">24</div>
+      <div class="q-text">Xốt nướng ngoài nướng thịt còn dùng để làm món gì nữa không?</div>
+      <div class="q-tag">Xốt Nướng</div>
+      <div class="toggle-icon">▼</div>
+    </div>
+    <div class="card-a">
+      <div class="host-label">Host trả lời</div>
+      <div class="a-text">Nhiều lắm! Xốt nướng Cicook có thể dùng để: làm <strong>sốt chấm</strong> trực tiếp cho hải sản luộc, rim thịt kho, làm <strong>topping pizza</strong>, trộn với mì gói, làm <strong>sốt burger</strong>, ướp cá hấp… Đây là điểm Cicook khác biệt — một sản phẩm dùng được rất nhiều cách, từ đơn giản đến sáng tạo!</div>
+    </div>
+  </div>
+
+  <!-- ===== SECTION 4: GIA VỊ CHẤM & ƯỚP ===== -->
+  <div class="section-label cat-cham">
+    <div class="icon" style="background:#F0E8FF">🌶️</div>
+    <h2>GIA VỊ CHẤM & ƯỚP NƯỚNG</h2>
+    <div class="count" style="background:#F0E8FF;color:#6B2FA0;">6 câu</div>
+  </div>
+
+  <!-- Q25 -->
+  <div class="qa-card cat-cham" data-cat="cham">
+    <div class="card-q" onclick="toggle(this)">
+      <div class="q-num">25</div>
+      <div class="q-text">Gia vị chấm Cicook có mấy loại? Khác gì muối tiêu chanh thường?</div>
+      <div class="q-tag">Chấm & Ướp</div>
+      <div class="toggle-icon">▼</div>
+    </div>
+    <div class="card-a">
+      <div class="host-label">Host trả lời</div>
+      <div class="a-text">Cicook có <strong>4 loại gia vị chấm</strong>: Chấm Muối Ớt Đỏ, Chấm Xốt Ớt, Chấm Muối Ớt Xanh, và Chấm Xốt Mắc Khén. Khác biệt hoàn toàn so với muối tiêu chanh thường vì đây là <strong>gia vị tươi được phối trộn hoàn chỉnh</strong> — vị cân bằng sẵn, thơm mùi nguyên liệu tươi, không cần tự pha. Chấm thịt, gà, cá, hải sản đều ngon. Dùng như "đại sứ ẩm thực Việt" ngay trên bàn ăn!</div>
+    </div>
+  </div>
+
+  <!-- Q26 -->
+  <div class="qa-card cat-cham" data-cat="cham">
+    <div class="card-q" onclick="toggle(this)">
+      <div class="q-num">26</div>
+      <div class="q-text">Gia vị ướp nướng dạng gói khác gì xốt nướng dạng lon?</div>
+      <div class="q-tag">Chấm & Ướp</div>
+      <div class="toggle-icon">▼</div>
+    </div>
+    <div class="card-a">
+      <div class="host-label">Host trả lời</div>
+      <div class="a-text">Khác nhau về công thức và cách dùng ạ! <strong>Gia vị ướp nướng dạng gói</strong> (BBQ, Ướp Thịt Nướng, Ướp Mắc Khén) là dạng <strong>gia vị khô để ướp</strong> — bạn trộn vào thịt và ướp trước khi nướng. <strong>Xốt nướng dạng lon/gói</strong> thì là dạng sốt ướt — vừa ướp vừa quét trong khi nướng. Tùy sở thích: thích khô thì dùng gói ướp, thích ẩm và bóng đẹp thì dùng xốt ướt!</div>
+    </div>
+  </div>
+
+  <!-- Q27 -->
+  <div class="qa-card cat-cham" data-cat="cham">
+    <div class="card-q" onclick="toggle(this)">
+      <div class="q-num">27</div>
+      <div class="q-text">Gia vị ướp nướng dùng cho ướp thịt bao lâu trước khi nướng vậy ạ?</div>
+      <div class="q-tag">Chấm & Ướp</div>
+      <div class="toggle-icon">▼</div>
+    </div>
+    <div class="card-a">
+      <div class="host-label">Host trả lời</div>
+      <div class="a-text">Để thịt ngấm gia vị ngon nhất, bạn nên ướp <strong>tối thiểu 30 phút</strong>. Nếu có thời gian, ướp <strong>2–4 tiếng trong tủ lạnh</strong> thì thịt sẽ ngon hơn nhiều — gia vị ngấm sâu, thịt mềm và đậm vị hơn. Mỗi gói dùng ướp cho <strong>500g thịt</strong>, nướng ở 200°C khoảng 11 phút. Đơn giản không?</div>
+    </div>
+  </div>
+
+  <!-- Q28 -->
+  <div class="qa-card cat-cham" data-cat="cham">
+    <div class="card-q" onclick="toggle(this)">
+      <div class="q-num">28</div>
+      <div class="q-text">Gia vị ướp nướng có phù hợp với hải sản không hay chỉ dùng cho thịt?</div>
+      <div class="q-tag">Chấm & Ướp</div>
+      <div class="toggle-icon">▼</div>
+    </div>
+    <div class="card-a">
+      <div class="host-label">Host trả lời</div>
+      <div class="a-text">Phù hợp với tất cả! Gia vị ướp nướng Cicook dùng được cho <strong>heo, bò, cừu, dê, gà, vịt, cá và toàn bộ hải sản</strong>. Với hải sản (tôm, mực, nghêu…) thì ướp ngắn hơn — chỉ cần <strong>15–20 phút</strong> là đủ vì hải sản ngấm gia vị nhanh hơn thịt. Nướng than hay áp chảo đều được!</div>
+    </div>
+  </div>
+
+  <!-- Q29 -->
+  <div class="qa-card cat-cham" data-cat="cham">
+    <div class="card-q" onclick="toggle(this)">
+      <div class="q-num">29</div>
+      <div class="q-text">Combo nào bạn recommend mua nhất cho người mới dùng Cicook lần đầu?</div>
+      <div class="q-tag">Chấm & Ướp</div>
+      <div class="toggle-icon">▼</div>
+    </div>
+    <div class="card-a">
+      <div class="host-label">Host trả lời</div>
+      <div class="a-text">Cho người mới, mình recommend <strong>combo "Try it all"</strong>: <br>① <strong>Xốt Lẩu Chua Cay</strong> (lon lớn) — cho bữa lẩu cuối tuần<br>② <strong>Xốt Nướng Mắc Khén</strong> (lon) — để khám phá hương vị Tây Bắc<br>③ <strong>Gói Chấm Muối Ớt Xanh</strong> — chấm hải sản ngay<br>Ba sản phẩm này đủ trải nghiệm hết dòng sản phẩm, và giá cực hợp lý trong phiên live hôm nay!</div>
+      <div class="tip-box">Đây là kịch bản upsell — chuẩn bị sẵn combo trong giỏ hàng Shopee.</div>
+    </div>
+  </div>
+
+  <!-- Q30 -->
+  <div class="qa-card cat-cham" data-cat="cham">
+    <div class="card-q" onclick="toggle(this)">
+      <div class="q-num">30</div>
+      <div class="q-text">Cicook có kế hoạch ra thêm sản phẩm mới không vậy?</div>
+      <div class="q-tag">Chấm & Ướp</div>
+      <div class="toggle-icon">▼</div>
+    </div>
+    <div class="card-a">
+      <div class="host-label">Host trả lời</div>
+      <div class="a-text">Cicook đang phát triển và mở rộng liên tục! Mục tiêu của chúng mình là trở thành <strong>thương hiệu gia vị tươi hàng đầu Việt Nam</strong>, và đưa gia vị Việt ra thị trường quốc tế — Mỹ, Châu Âu, Châu Á. Sắp tới sẽ có nhiều dòng gia vị mới theo vùng miền Việt Nam. <strong>Follow Fanpage và TikTok Cicook</strong> để không bỏ lỡ sản phẩm mới nhất nha! Và đừng quên ủng hộ mình ngay hôm nay — mỗi đơn hàng là một bước để Cicook lớn mạnh hơn!</div>
+      <div class="tip-box">Đây là câu kết livestream lý tưởng — kêu gọi follow và chốt đơn cuối phiên.</div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  Kịch bản dùng nội bộ — <strong>Cicook Joint Stock Company</strong> · love@cicook.vn · 1900.4408 · cicook.vn
+</div>
+
+<script>
+  function toggle(el) {
+    const card = el.parentElement;
+    card.classList.toggle('open');
+  }
+
+  function filterCat(cat, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.qa-card').forEach(card => {
+      if (cat === 'all' || card.dataset.cat === cat) {
+        card.classList.remove('hidden');
+      } else {
+        card.classList.add('hidden');
+        card.classList.remove('open');
+      }
+    });
+  }
+
+  // Open all on Ctrl+A for print
+  document.addEventListener('keydown', e => {
+    if (e.ctrlKey && e.key === 'p') {
+      document.querySelectorAll('.qa-card').forEach(c => c.classList.add('open'));
+    }
+  });
+</script>
+</body>
+</html>
