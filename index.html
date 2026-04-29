@@ -24,6 +24,7 @@
     background: var(--cream);
     color: var(--dark);
     min-height: 100vh;
+    font-size: 18px;
   }
 
   /* HEADER */
@@ -108,10 +109,10 @@
   .filter-btn {
     border: 2px solid transparent;
     border-radius: 30px;
-    padding: 6px 18px;
+    padding: 8px 22px;
     font-family: 'Nunito', sans-serif;
     font-weight: 700;
-    font-size: 13px;
+    font-size: 15px;
     cursor: pointer;
     transition: all 0.2s;
     background: #F5EDED;
@@ -128,7 +129,7 @@
   .filter-btn.cat-brand.active { background: var(--red-dark); border-color: var(--red-dark); }
 
   /* MAIN */
-  .main { padding: 28px 32px 60px; max-width: 900px; margin: 0 auto; }
+  .main { padding: 28px 32px 60px; max-width: 1100px; margin: 0 auto; }
 
   /* SECTION LABEL */
   .section-label {
@@ -138,24 +139,24 @@
     margin: 32px 0 16px;
   }
   .section-label .icon {
-    width: 40px; height: 40px;
+    width: 46px; height: 46px;
     border-radius: 12px;
     display: flex; align-items: center; justify-content: center;
-    font-size: 20px;
+    font-size: 24px;
     flex-shrink: 0;
   }
   .section-label h2 {
-    font-family: 'Nunito';
-    font-size: 22px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 26px;
     letter-spacing: 1.5px;
   }
   .section-label .count {
     margin-left: auto;
     background: var(--light-red);
     color: var(--red);
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 800;
-    padding: 3px 12px;
+    padding: 4px 14px;
     border-radius: 20px;
   }
 
@@ -177,39 +178,39 @@
   .card-q {
     display: flex;
     align-items: flex-start;
-    gap: 14px;
-    padding: 18px 20px 14px;
+    gap: 16px;
+    padding: 22px 24px 18px;
     cursor: pointer;
     user-select: none;
   }
   .q-num {
-    width: 34px; height: 34px;
-    border-radius: 10px;
+    width: 44px; height: 44px;
+    border-radius: 12px;
     display: flex; align-items: center; justify-content: center;
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 17px;
+    font-size: 22px;
     flex-shrink: 0;
-    margin-top: 1px;
+    margin-top: 2px;
   }
   .q-text {
     flex: 1;
-    font-weight: 700;
-    font-size: 15px;
+    font-weight: 800;
+    font-size: 19px;
     line-height: 1.5;
     color: var(--dark);
   }
   .q-tag {
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 800;
     letter-spacing: 1px;
     text-transform: uppercase;
-    padding: 2px 10px;
+    padding: 3px 12px;
     border-radius: 20px;
     margin-top: 4px;
     flex-shrink: 0;
   }
   .toggle-icon {
-    font-size: 18px;
+    font-size: 20px;
     color: var(--gray);
     margin-top: 4px;
     transition: transform 0.3s;
@@ -220,40 +221,40 @@
   .card-a {
     display: none;
     border-top: 1.5px dashed #F0DADA;
-    padding: 16px 20px 18px 68px;
+    padding: 20px 24px 22px 84px;
     background: var(--cream);
   }
   .qa-card.open .card-a { display: block; }
 
   .host-label {
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 800;
     letter-spacing: 2px;
     text-transform: uppercase;
     color: var(--red);
-    margin-bottom: 8px;
+    margin-bottom: 10px;
     display: flex;
     align-items: center;
     gap: 6px;
   }
   .host-label::before {
     content: '🎙️';
-    font-size: 14px;
+    font-size: 16px;
   }
   .a-text {
-    font-size: 14px;
-    line-height: 1.75;
+    font-size: 17px;
+    line-height: 1.85;
     color: #3A2020;
     font-weight: 600;
   }
   .a-text strong { color: var(--red); }
   .tip-box {
-    margin-top: 12px;
+    margin-top: 14px;
     background: linear-gradient(135deg, #FFF3CD, #FFF8E7);
     border-left: 3px solid var(--gold);
     border-radius: 0 8px 8px 0;
-    padding: 10px 14px;
-    font-size: 13px;
+    padding: 12px 16px;
+    font-size: 15px;
     color: #7A5500;
     font-weight: 600;
   }
@@ -407,14 +408,14 @@
   <div class="qa-card cat-brand" data-cat="brand">
     <div class="card-q" onclick="toggle(this)">
       <div class="q-num">06</div>
-      <div class="q-text">Mua ở đâu vậy bạn? Shopee có không?</div>
+      <div class="q-text">Mua sản phẩm Cicook ở đâu vậy ạ?</div>
       <div class="q-tag">Thương hiệu</div>
       <div class="toggle-icon">▼</div>
     </div>
     <div class="card-a">
       <div class="host-label">Host trả lời</div>
-      <div class="a-text">Có ạ! Cicook bán trên <strong>Shopee</strong> (có link ngay dưới livestream này nha), website <strong>Cicook.vn</strong>, và đang có mặt tại các cửa hàng thực phẩm sạch, siêu thị cao cấp tại TP.HCM, Hà Nội, Đà Nẵng. Mua ngay hôm nay trên Shopee để được freeship và ưu đãi đặc biệt trong livestream này nha!</div>
-      <div class="tip-box">Nhắc link giỏ hàng dưới livestream, gim sản phẩm trong phiên.</div>
+      <div class="a-text">Bạn có thể mua Cicook qua website chính thức <strong>Cicook.vn</strong>, hoặc liên hệ hotline <strong>1900.4408</strong> để được tư vấn và đặt hàng trực tiếp. Ngoài ra Cicook cũng đang có mặt tại các <strong>cửa hàng thực phẩm sạch và siêu thị cao cấp</strong> tại TP.HCM, Hà Nội, Đà Nẵng. Trong phiên livestream hôm nay, bạn có thể chốt đơn ngay tại đây để nhận ưu đãi đặc biệt nha!</div>
+      <div class="tip-box">Nhắc link giỏ hàng và gim sản phẩm trong phiên live. Đọc rõ địa chỉ website.</div>
     </div>
   </div>
 
@@ -774,14 +775,14 @@
   <div class="qa-card cat-cham" data-cat="cham">
     <div class="card-q" onclick="toggle(this)">
       <div class="q-num">30</div>
-      <div class="q-text">Cicook có kế hoạch ra thêm sản phẩm mới không vậy?</div>
+      <div class="q-text">Dùng Cicook rồi mà nấu không ngon thì sao? Có được đổi trả không ạ?</div>
       <div class="q-tag">Chấm & Ướp</div>
       <div class="toggle-icon">▼</div>
     </div>
     <div class="card-a">
       <div class="host-label">Host trả lời</div>
-      <div class="a-text">Cicook đang phát triển và mở rộng liên tục! Mục tiêu của chúng mình là trở thành <strong>thương hiệu gia vị tươi hàng đầu Việt Nam</strong>, và đưa gia vị Việt ra thị trường quốc tế — Mỹ, Châu Âu, Châu Á. Sắp tới sẽ có nhiều dòng gia vị mới theo vùng miền Việt Nam. <strong>Follow Fanpage và TikTok Cicook</strong> để không bỏ lỡ sản phẩm mới nhất nha! Và đừng quên ủng hộ mình ngay hôm nay — mỗi đơn hàng là một bước để Cicook lớn mạnh hơn!</div>
-      <div class="tip-box">Đây là câu kết livestream lý tưởng — kêu gọi follow và chốt đơn cuối phiên.</div>
+      <div class="a-text">Mình tự tin lắm — <strong>dùng Cicook đúng cách là ngon ngay lần đầu!</strong> Nhưng nếu bạn có bất kỳ thắc mắc nào trong quá trình nấu, cứ nhắn thẳng vào <strong>Fanpage Cicook</strong> hoặc gọi hotline <strong>1900.4408</strong> — đội ngũ mình hỗ trợ nhiệt tình lắm. Còn nếu sản phẩm có vấn đề về chất lượng, Cicook <strong>cam kết đổi trả 100%</strong>. Mua hàng an tâm nha bạn — mình đứng sau chất lượng từng sản phẩm!</div>
+      <div class="tip-box">Đây là câu kết tốt — thể hiện sự tự tin và cam kết. Nhắc Follow Fanpage để kết thúc phiên.</div>
     </div>
   </div>
 
